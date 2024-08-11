@@ -17,7 +17,7 @@ readdirSync("./routes").map((route) =>
 );
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("When Can I retired?!?!");
 });
 
 const server = () => {

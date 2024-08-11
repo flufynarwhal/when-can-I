@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import styled from "styled-components";
+import React from "react";
+import bg from "./img/bg.jpg";
+import { MainLayout } from "./styles/Layouts";
+import Orb from "./Components/Orb/Orb";
+import Navigation from "./Components/Navigation/Navigation";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AppStyled bg={bg} className="App">
+      <Orb />
+      <MainLayout>
+        <Navigation />
+        <h1>How long until I have 3 million in equity?</h1>
+      </MainLayout>
+    </AppStyled>
+  );
 }
 
-export default App
+const AppStyled = styled.div`
+  height: 100vh;
+  background-image: url(${(props) => props.bg});
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+`;
+
+export default App;
