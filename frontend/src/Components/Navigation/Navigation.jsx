@@ -4,10 +4,10 @@ import { menuItems } from "../../utils/menuItems";
 import avatar from "../../img/avatar.jpg";
 import { signout } from "../../utils/icons";
 
-function Navigation() {
+function Navigation({ active, setActive }) {
   return (
     <NavStyled>
-      <div className="user--pic">
+      <div className="user--container">
         <img src={avatar} alt="" />
         <div className="text">
           <h2>Mike</h2>
@@ -17,7 +17,11 @@ function Navigation() {
       <ul className="menu--items">
         {menuItems.map((item) => {
           return (
-            <li key={item.id}>
+            <li
+              key={item.id}
+              onClick={() => setActive(item.id)}
+              className={active === item.id ? "active" : ""}
+            >
               {item.icon}
               <span>{item.title}</span>
             </li>
@@ -32,44 +36,73 @@ function Navigation() {
 }
 
 const NavStyled = styled.nav`
-    padding: 2rem 1.5rem;
-    width: 374px;
-    height: 100%;
-    background: rgba(252, 246, 249, 0.78);
-    border: 3px solid #FFFFFF;
-    backdrop-filter: blur(4.5px);
-    border-radius: 32px;
-    
+  padding: 2rem 1.5rem;
+  width: 374px;
+  height: 100%;
+  background: rgba(252, 246, 249, 0.78);
+  border: 3px solid #ffffff;
+  backdrop-filter: blur(4.5px);
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
 
-    .user--pic {
+  .user--container {
     display: flex;
     align-items: center;
-
+    gap: 1rem;
+    height: 100px;
     img {
-      width: 50px;
-      height: 50px;
-      border-radius: 80%;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
       object-fit: cover;
+      background-color: #fcf6f9;
+      border: 2px solid #ffffff;
+      padding: 0.2rem;
+      box-shadow: 0px 1px 17px rgba(0, 0, 0, 0.06);
     }
-
-    .text {
-      margin: 10px;
+    h2 {
+      color: rgba(34, 34, 96, 1);
+    }
+    p {
+      color: rgba(34, 34, 96, 0.6);
     }
   }
 
-  
-
+  .menu--items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     li {
-      display: flex;
+      display: grid;
+      grid-template-columns: 40px auto;
       align-items: center;
-      margin: 10px 0;
-
-      i { /* Targeting the icon element */
-        margin-right: 8px; /* Adjust this value as needed */
-        font-size: 24px; /* Adjust size as needed */
-      }
-    
-  
+      margin: 0.6rem 0;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.4s ease-in-out;
+    }
+    i {
+      color: rgba(34, 34, 96, 0.8);
+      font-size: 1.4rem;
+      transition: all 0.4s ease-in-out;
+    }
+  }
+  .active {
+    color: rgba(34, 34, 96, 1);
+  }
+  $::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: #222260;
+    border-radius: 0 10px 10px 0;
+  }
 `;
 
 export default Navigation;
