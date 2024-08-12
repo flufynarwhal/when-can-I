@@ -83,25 +83,29 @@ const NavStyled = styled.nav`
       font-weight: 500;
       cursor: pointer;
       transition: all 0.4s ease-in-out;
+      color: rgba(34, 34, 96, 0.75);
     }
     i {
-      color: rgba(34, 34, 96, 0.8);
+      color: rgba(34, 34, 96, 0.75);
       font-size: 1.4rem;
       transition: all 0.4s ease-in-out;
     }
   }
   .active {
-    color: rgba(34, 34, 96, 1);
-  }
-  $::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    background: #222260;
-    border-radius: 0 10px 10px 0;
+    color: rgba(34, 34, 96, 1) !important;
+    i {
+      color: rgba(34, 34, 96, 1) !important;
+    }
+    $::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: #222260;
+      border-radius: 0 10px 10px 0;
+    }
   }
 `;
 
