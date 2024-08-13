@@ -12,13 +12,14 @@ export const GlobalProvider = ({ children }) => {
   const addIncome = async (income) => {
     try {
       const response = await axios.post(`${BASE_URL}add-income`, income);
-    } catch (error) {
+      setIncomes([...incomes, response.data]);
+    } catch (err) {
       setError(err.response.data.message);
     }
   };
 
   return (
-    <GlobalContext.Provider value={{ addIncome }}>
+    <GlobalContext.Provider value={{ addIncome, incomes, expenses, error }}>
       {children}
     </GlobalContext.Provider>
   );
