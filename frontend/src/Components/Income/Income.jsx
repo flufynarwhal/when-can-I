@@ -5,7 +5,7 @@ import { useGlobalContext } from "../../context/globalContext";
 import Form from "../Form/Form";
 
 function Income() {
-  const { addIncome } = useGlobalContext();
+  const { addIncome, incomes, getIncomes } = useGlobalContext();
 
   return (
     <IncomeStyled>
