@@ -13,17 +13,36 @@ export const GlobalProvider = ({ children }) => {
     try {
       const response = await axios.post(`${BASE_URL}add-income`, income);
       setIncomes([...incomes, response.data]);
+      getIncomes();
     } catch (err) {
       setError(err.response.data.message);
     }
   };
 
   const getIncomes = async () => {
-    const response = await axios.get(`${BASE_URL}get-incomes`);
-    setIncomes(response.data);
-    console.log(response.data);
+    try {
+      const response = await axios.get(`${BASE_URL}get-incomes`);
+      console.log(response.data);
+      setIncomes(response.data.incomes || []);
+    } catch (err) {
+      console.error("Error fetching incomes:", err);
+      setError(err.response?.data?.message || "An error occurred");
+    }
   };
 
+  const deleteIncome = async (id) => {
+    try {
+      const res = await axios.delete(`${BASE_URL}delete-income/${id}`);
+      getIncomes();
+    } catch (error) {
+      console.error("Error Deleting Income:", error);
+    }
+  };
+
+  const totalIncome = () => {
+    return incomes.reduce((acc, income) => acc + income.amount, 0);
+  };
+  console.log(totalIncome);
   return (
     <GlobalContext.Provider
       value={{
@@ -32,6 +51,8 @@ export const GlobalProvider = ({ children }) => {
         getIncomes,
         expenses,
         error,
+        deleteIncome,
+        totalIncome,
       }}
     >
       {children}

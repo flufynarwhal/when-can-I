@@ -7,7 +7,7 @@ import Button from "../Button/Button";
 import { plus } from "../../utils/icons.jsx";
 
 function Form() {
-  const { addIncome } = useGlobalContext();
+  const { addIncome, getIncomes } = useGlobalContext();
 
   const [inputState, setInputState] = useState({
     title: "",
@@ -27,6 +27,13 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
     addIncome(inputState);
+    setInputState({
+      title: "",
+      amount: "",
+      date: null,
+      category: "",
+      description: "",
+    });
   };
 
   return (
@@ -74,12 +81,12 @@ function Form() {
           </option>
           <option value="salary">Salary</option>
           <option value="freelancing">Freelancing</option>
-          <option value="investments">Investments</option>
+          <option value="investments">Investiments</option>
           <option value="stocks">Stocks</option>
           <option value="bitcoin">Bitcoin</option>
-          <option value="bank">Bank Interest</option>
+          <option value="bank">Bank Transfer</option>
           <option value="youtube">Youtube</option>
-          <option value="other">Other Side Hustle</option>
+          <option value="other">Other</option>
         </select>
       </div>
       <div className="input--control">
