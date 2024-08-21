@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const { readdirSync } = require("fs");
 const { db } = require("./database/db.js");
 const app = express();
 require("dotenv").config({ path: "./.env" });
+const transactionRouter = require("./routes/transactions.js");
 
 const PORT = process.env.PORT;
 
@@ -12,9 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-readdirSync("./routes").map((route) =>
-  app.use("/api/v1", require("./routes/" + route))
-);
+app.use("/api/v1", transactionRouter);
 
 app.get("/", (req, res) => {
   res.send("When Can I retired?!?!");

@@ -25,6 +25,7 @@ function Form() {
   };
 
   const handleSubmit = (e) => {
+    console.log("income submitted");
     e.preventDefault();
     addIncome(inputState);
     setInputState({

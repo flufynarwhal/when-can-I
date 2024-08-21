@@ -1,9 +1,9 @@
-const IncomeSchema = require("../models/IncomeModel");
+const IncomeModel = require("../models/IncomeModel");
 
 exports.addIncome = async (req, res) => {
   const { title, amount, category, description, date } = req.body;
 
-  const income = IncomeModel({
+  const income = IncomeModel.create({
     title,
     amount,
     category,
@@ -17,7 +17,7 @@ exports.addIncome = async (req, res) => {
       return res.status(400).json({ message: "All fields are required!" });
     }
 
-    await income.save();
+    console.log({ income });
 
     if (!amount < 0) {
       return res.status(201).json({
@@ -31,8 +31,6 @@ exports.addIncome = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
   }
-
-  console.log(income);
 };
 
 exports.getIncomes = async (req, res) => {
